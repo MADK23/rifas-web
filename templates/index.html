@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rifa MAG</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+
+    <div class="background-animation">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+</div>
+
+<div class="container-principal">
+
+    <div class="header">
+
+        <div class="hero">
+
+    <img
+    src="{{ url_for('static', filename='img/' + config[7]) }}"
+    class="premio-img"
+>
+
+    <h1>{{ config[1] }}</h1>
+    <p>📅 Sorteo: {{ config[3] }}</p>
+
+    <p>💰 ${{ "{:,}".format(config[2]) }} COP por número</p>
+
+
+
+
+<div class="buscador-container">
+
+    <input
+        type="text"
+        id="buscarNumero"
+        placeholder="🔍 Buscar número (001-500)"
+        maxlength="3"
+    >
+
+</div>
+
+</div>
+
+        <div class="leyenda">
+
+    <span class="verde"></span> Disponible
+    <span class="azul"></span> Seleccionado
+    <span class="amarillo"></span> Reservado
+    <span class="rojo"></span> Vendido
+
+</div>
+
+    </div>
+
+    
+
+    <div class="numeros">
+
+    {% for numero in numeros %}
+
+        <div
+            class="numero {{ numero.estado }}"
+            data-numero="{{ numero.numero }}"
+        >
+
+            {{ numero.numero }}
+
+        </div>
+
+    {% endfor %}
+
+</div>
+
+<div class="seleccionados-container">
+
+    <h3>Números seleccionados:</h3>
+
+    <p id="seleccionados">
+        Ninguno
+    </p>
+
+    <button id="continuar">
+        Continuar compra
+    </button>
+
+</div>
+
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</div>
+</div>
+
+<script>
+
+const buscador = document.getElementById("buscarNumero");
+
+buscador.addEventListener("input", function () {
+
+    let valor = this.value;
+
+    // Convertir 1 → 001, 25 → 025
+    valor = valor.padStart(3, "0");
+
+    // Quitar resaltados anteriores
+    document.querySelectorAll(".numero").forEach(numero => {
+        numero.classList.remove("numero-encontrado");
+    });
+
+    // Buscar el número
+    const encontrado = document.querySelector(
+        `[data-numero="${valor}"]`
+    );
+
+    if (encontrado) {
+
+        encontrado.classList.add("numero-encontrado");
+
+        encontrado.scrollIntoView({
+            behavior: "smooth",
+            block: "center"
+        });
+
+    }
+
+});
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Dashboard</title>
+
+    <a href="/admin/configuracion" class="btn-config">
+
+    ⚙️ Configuración
+
+</a>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+<div class="admin-container">
+
+    <h1 class="admin-title">
+        🎟 Compras Pendientes
+    </h1>
+
+    <div class="stats-container">
+
+    <div class="stat-card vendidos">
+        <h2>🔴 Vendidos</h2>
+        <p>{{ vendidos }}</p>
+    </div>
+
+    <div class="stat-card reservados">
+        <h2>🟡 Reservados</h2>
+        <p>{{ reservados }}</p>
+    </div>
+
+    <div class="stat-card disponibles">
+        <h2>🟢 Disponibles</h2>
+        <p>{{ disponibles }}</p>
+    </div>
+
+    <div class="stat-card dinero">
+        <h2>💰 Recaudado</h2>
+        <p>${{ "{:,.0f}".format(recaudado) }}</p>
+    </div>
+
+</div>
+
+    <table class="admin-table">
+
+        <thead>
+
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Teléfono</th>
+                <th>Método</th>
+                <th>Comprobante</th>
+                <th>Acciones</th>
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+        {% for compra in compras %}
+
+        <tr>
+
+            <td>{{ compra[0] }}</td>
+
+            <td>{{ compra[1] }}</td>
+
+            <td>{{ compra[2] }}</td>
+
+            <td>{{ compra[3] }}</td>
+
+            <td>
+
+                {% if compra[4] %}
+
+                <a
+                    class="comprobante-link"
+                    href="/uploads/{{ compra[4] }}"
+                    target="_blank">
+
+                    Ver comprobante
+
+                </a>
+
+                {% else %}
+
+                No enviado
+
+                {% endif %}
+
+            </td>
+
+            <td>
+
+                <a
+                    class="btn-aprobar"
+                    href="/admin/aprobar/{{ compra[0] }}">
+
+                    Aprobar
+
+                </a>
+
+                <a
+                    class="btn-rechazar"
+                    href="/admin/rechazar/{{ compra[0] }}">
+
+                    Rechazar
+
+                </a>
+
+            </td>
+
+        </tr>
+
+        {% endfor %}
+
+        </tbody>
+
+    </table>
+
+</div>
+
+</body>
+
+</html>

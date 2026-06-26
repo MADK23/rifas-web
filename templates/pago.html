@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Finalizar Compra</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+<div class="pago-container">
+
+    <div class="pago-card">
+
+        <h1>🎉 Reserva realizada correctamente</h1>
+
+        <p class="subtitulo">
+            Tienes <strong>30 minutos</strong> para realizar el pago.
+        </p>
+
+        <div class="info-box">
+
+            <h2>🎟 Números reservados</h2>
+
+            <p class="numeros-reservados">
+                {{ numeros }}
+            </p>
+
+        </div>
+
+        <div class="info-box total-box">
+
+            <h2>💰 Total a pagar</h2>
+
+            <p class="total">
+                ${{ "{:,.0f}".format(total) }} COP
+            </p>
+
+        </div>
+
+        <h2>🏦 Métodos de pago</h2>
+
+        <div class="metodos-pago">
+
+            <div class="metodo">
+
+                <h3>Nequi</h3>
+
+                <p>300 123 4567</p>
+
+            </div>
+
+            <div class="metodo">
+
+                <h3>Bancolombia</h3>
+
+                <p>Cuenta Ahorros</p>
+
+                <p>1234567890</p>
+
+            </div>
+
+            <div class="metodo">
+
+                <h3>Daviplata</h3>
+
+                <p>300 123 4567</p>
+
+            </div>
+
+        </div>
+
+        <a
+            class="btn-whatsapp"
+            href="https://wa.me/573014340181"
+            target="_blank"
+        >
+
+            📱 Enviar comprobante por WhatsApp
+
+        </a>
+
+        <hr>
+
+        <h2>📎 Subir comprobante</h2>
+
+        <form
+            action="/subir_comprobante"
+            method="POST"
+            enctype="multipart/form-data"
+        >
+
+            <input
+                type="hidden"
+                name="compra_id"
+                value="{{ compra_id }}"
+            >
+
+            <input
+                type="file"
+                name="comprobante"
+                accept="image/*,.pdf"
+                required
+            >
+
+            <button type="submit">
+
+                Subir comprobante
+
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Configuración</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}"
+    >
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>⚙️ Configuración de la Rifa</h1>
+
+    <form method="POST">
+
+        <label>Nombre de la rifa</label>
+
+        <input
+            type="text"
+            name="nombre_rifa"
+            value="{{ config[1] }}"
+        >
+
+        <label>Precio por número</label>
+
+        <input
+            type="number"
+            name="precio_numero"
+            value="{{ config[2] }}"
+        >
+
+        <label>Fecha del sorteo</label>
+
+        <input
+            type="text"
+            name="fecha_sorteo"
+            value="{{ config[3] }}"
+        >
+
+        <label>Nequi</label>
+
+        <input
+            type="text"
+            name="nequi"
+            value="{{ config[4] }}"
+        >
+
+        <label>Bancolombia</label>
+
+        <input
+            type="text"
+            name="bancolombia"
+            value="{{ config[5] }}"
+        >
+
+        <label>Daviplata</label>
+
+        <input
+            type="text"
+            name="daviplata"
+            value="{{ config[6] }}"
+        >
+
+        <label>Imagen del premio</label>
+
+        <input
+            type="text"
+            name="imagen_premio"
+            value="{{ config[7] }}"
+        >
+
+        <button type="submit">
+
+            Guardar cambios
+
+        </button>
+
+    </form>
+
+</div>
+
+</body>
+</html>

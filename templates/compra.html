@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finalizar compra</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<div class="compra-container">
+
+    <div class="compra-card">
+
+        <h1>🎟 Finalizar compra</h1>
+
+        <div class="numeros-box">
+            <h3>Números seleccionados</h3>
+
+            <div class="numeros-lista">
+                {% for numero in numeros %}
+                    <span class="numero-badge">{{ numero }}</span>
+                {% endfor %}
+            </div>
+        </div>
+
+        <form method="POST" action="/reservar">
+
+    {% for numero in numeros %}
+        <input
+            type="hidden"
+            name="numeros"
+            value="{{ numero }}"
+        >
+    {% endfor %}
+
+            <label>Nombre completo</label>
+            <input type="text" name="nombre" required>
+
+            <label>Teléfono</label>
+            <input type="text" name="telefono" required>
+
+            <label>Ciudad</label>
+            <input type="text" name="ciudad" required>
+
+            <label>Correo (opcional)</label>
+            <input type="email" name="correo">
+
+            <label>Método de pago</label>
+
+            <select name="metodo_pago" required>
+                <option value="Nequi">Nequi</option>
+                <option value="Bancolombia">Bancolombia</option>
+                <option value="Daviplata">Daviplata</option>
+            </select>
+
+            <button type="submit">
+                Reservar números
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+</html>
