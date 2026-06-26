@@ -39,8 +39,8 @@ def conectar():
 @app.route("/")
 def home():
 
-    liberar_reservas()
-
+    # NO liberar reservas - dejar manual
+    
     # Conexión a PostgreSQL
     conn = conectar()
     cursor = conn.cursor()
@@ -156,32 +156,18 @@ def reservar():
 
     limite = datetime.now() + timedelta(minutes=30)
 
-    # Reservar números
-
+    # Reservar números - SIN tiempo límite
     for numero in numeros:
-
         cursor.execute("""
-
             UPDATE numeros
-
             SET
-
                 estado='reservado',
-
-                compra_id=%s,
-
-                reservado_hasta=%s
-
+                compra_id=%s
             WHERE numero=%s
-
         """,
-
         (
-
             compra_id,
-            limite,
             numero
-
         ))
 
     conn.commit()
@@ -273,7 +259,7 @@ def dashboard():
     if "admin" not in session:
         return redirect("/admin")
 
-    liberar_reservas()
+    # NO liberar reservas - dejar manual
 
     conn = conectar()
     cursor = conn.cursor()
