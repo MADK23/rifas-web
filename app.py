@@ -4,17 +4,8 @@ import os
 from werkzeug.utils import secure_filename
 from flask import send_from_directory
 import psycopg2
-import cloudinary
-import cloudinary.uploader
 
 from config import *
-
-# Configurar Cloudinary
-cloudinary.config(
-    cloud_name=os.getenv('CLOUDINARY_CLOUD_NAME'),
-    api_key=os.getenv('CLOUDINARY_API_KEY'),
-    api_secret=os.getenv('CLOUDINARY_API_SECRET')
-)
 
 
 
@@ -212,39 +203,11 @@ def reservar():
 
 @app.route("/subir_comprobante", methods=["POST"])
 def subir_comprobante():
-
-    compra_id = request.form["compra_id"]
-
-    archivo = request.files["comprobante"]
-
-    if archivo.filename == "":
-        return "No seleccionaste ningún archivo"
-
-    try:
-        # Subir a Cloudinary
-        resultado = cloudinary.uploader.upload(archivo)
-        url_archivo = resultado['secure_url']
-
-        conn = conectar()
-        cursor = conn.cursor()
-
-        cursor.execute("""
-            UPDATE compras
-            SET comprobante = %s
-            WHERE id = %s
-        """,
-        (url_archivo, compra_id))
-
-        conn.commit()
-        cursor.close()
-        conn.close()
-
-        return """
-        <h1>Comprobante enviado correctamente</h1>
-        <a href='/'>Volver al inicio</a>
-        """
-    except Exception as e:
-        return f"Error al subir archivo: {str(e)}"
+    return """
+    <h1>El pago se confirma manualmente</h1>
+    <p>El administrador revisará tu pago y confirmará tu compra.</p>
+    <a href='/'>Volver al inicio</a>
+    """
 
 @app.route("/admin")
 def admin():
