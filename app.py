@@ -188,17 +188,26 @@ def reservar():
 
     cursor.close()
 
-    conn.close()
-
     total = len(numeros) * 20000
 
+    # Obtener configuración para mostrar métodos de pago
+    conn = conectar()
+    cursor = conn.cursor()
     
-
+    cursor.execute("SELECT nequi, bancolombia, daviplata FROM configuracion WHERE id = 1")
+    config_pago = cursor.fetchone()
+    
+    cursor.close()
+    conn.close()
+    
     return render_template(
     "pago.html",
     numeros=numeros,
     total=total,
-    compra_id=compra_id
+    compra_id=compra_id,
+    nequi=config_pago[0] if config_pago else "No configurado",
+    bancolombia=config_pago[1] if config_pago else "No configurado",
+    daviplata=config_pago[2] if config_pago else "No configurado"
 )
 
 @app.route("/subir_comprobante", methods=["POST"])
