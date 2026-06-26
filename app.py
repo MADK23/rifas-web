@@ -3,7 +3,7 @@ from flask import Flask, render_template, request, redirect, session
 import os
 from werkzeug.utils import secure_filename
 from flask import send_from_directory
-import psycopg
+import psycopg2
 
 from config import *
 
@@ -20,13 +20,13 @@ app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 
 def conectar():
 
-    return psycopg.connect(
+    return psycopg2.connect(
 
         host=DB_HOST,
 
         port=DB_PORT,
 
-        dbname=DB_NAME,
+        database=DB_NAME,
 
         user=DB_USER,
 
