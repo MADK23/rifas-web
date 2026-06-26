@@ -72,6 +72,8 @@ body {
 .header p {
     margin: 5px 0;
     font-size: 14px;
+    color: #222;
+    font-weight: bold;
 }
 
 @media (min-width: 768px) {
@@ -119,6 +121,10 @@ body {
     text-align: center;
     color: white;
     font-size: 14px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
 }
 
 .leyenda span {
@@ -126,11 +132,11 @@ body {
     height: 15px;
     display: inline-block;
     border-radius: 5px;
-    margin-left: 10px;
     margin-right: 5px;
 }
 
 .verde { background: #2ecc71; }
+.azul { background: #3498db; }
 .amarillo { background: #f1c40f; }
 .rojo { background: #e74c3c; }
 
@@ -188,7 +194,8 @@ body {
 .disponible { background: #2ecc71; }
 .reservado { background: #f1c40f; }
 .vendido { background: #e74c3c; }
-
+#222 !important;
+    font-weight: bold
 .seleccionado {
     background-color: #3498db !important;
     border: 2px solid #21618c;
