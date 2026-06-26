@@ -86,37 +86,6 @@
 
         </a>
 
-        <hr>
-
-        <h2>📎 Subir comprobante</h2>
-
-        <form
-            action="/subir_comprobante"
-            method="POST"
-            enctype="multipart/form-data"
-        >
-
-            <input
-                type="hidden"
-                name="compra_id"
-                value="{{ compra_id }}"
-            >
-
-            <input
-                type="file"
-                name="comprobante"
-                accept="image/*,.pdf"
-                required
-            >
-
-            <button type="submit">
-
-                Subir comprobante
-
-            </button>
-
-        </form>
-
     </div>
 
 </div>
