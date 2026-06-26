@@ -119,7 +119,7 @@ body {
 .leyenda {
     margin-top: 15px;
     text-align: center;
-    color: white;
+    color: #222;
     font-size: 14px;
     display: flex;
     flex-wrap: wrap;
@@ -194,12 +194,12 @@ body {
 .disponible { background: #2ecc71; }
 .reservado { background: #f1c40f; }
 .vendido { background: #e74c3c; }
-#222 !important;
-    font-weight: bold
+
 .seleccionado {
     background-color: #3498db !important;
     border: 2px solid #21618c;
-    color: white;
+    color: #222 !important;
+    font-weight: bold;
     transform: scale(1.05);
     box-shadow: 0 0 10px rgba(52, 152, 219, 0.6);
 }
